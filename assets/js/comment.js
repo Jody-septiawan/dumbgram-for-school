@@ -1,6 +1,5 @@
 async function getCommentsById(id) {
   let comments = document.getElementById("comments");
-
   comments.innerHTML = "";
 
   const { data, error } = await kontenbaseClient.service("Comments").find({

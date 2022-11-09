@@ -5,7 +5,7 @@ async function login(e) {
   let email = document.getElementById("login-email").value;
   let password = document.getElementById("login-password").value;
   let alertLogin = document.getElementById("alert-login");
-  let submit = document.getElementById("login-submit");
+  let btnClose = document.getElementById("btn-close-login-modal");
 
   alertLogin.innerHTML = "";
 
@@ -19,29 +19,27 @@ async function login(e) {
         </div>`);
   }
 
-  submit.setAttribute("data-bs-dismiss", "modal");
-  submit.setAttribute("aria-label", "Close");
-  submit.click();
+  btnClose.click();
   getUser();
 }
 
 async function register(e) {
   e.preventDefault();
   let email = document.getElementById("register-email").value;
-  let name = document.getElementById("register-name").value;
+  let firstName = document.getElementById("register-name").value;
   let username = document.getElementById("register-username").value;
   let password = document.getElementById("register-password").value;
   let alertLogin = document.getElementById("alert-register");
-  let submit = document.getElementById("register-submit");
+
+  let btnClose = document.getElementById("btn-close-register-modal");
 
   alertLogin.innerHTML = "";
 
   let data = {
     email,
     password,
-    firstName: name,
+    firstName,
     username,
-    role: ["62353630c4f3b1427c6aca2a"],
   };
 
   const { error } = await kontenbaseClient.auth.register(data);
@@ -52,9 +50,7 @@ async function register(e) {
           </div>`);
   }
 
-  submit.setAttribute("data-bs-dismiss", "modal");
-  submit.setAttribute("aria-label", "Close");
-  submit.click();
+  btnClose.click();
   getUser();
 }
 
@@ -119,6 +115,17 @@ async function getUser() {
     </div>
   </div>`;
 
+  commentInputContainer.innerHTML = `
+  <input id="input-feed-id" hidden />
+  <input
+    type="text"
+    style="width: 100%; border: none; background-color: #4b4b4b"
+    class="rounded px-2 py-1 text-white"
+    placeholder="Comment"
+    id="input-comment"
+    onkeyup="handleCreateComment(event)"
+  />`;
+
   if (localStorage.getItem("token")) {
     const { user, error } = await kontenbaseClient.auth.user();
 
@@ -139,7 +146,11 @@ async function getUser() {
           class="rounded-circle border border-5 border-rainbow"
         />`
               : `<div style="width: 130px; height: 130px; font-size: 40px; font-weight: 700"
-              class="rounded-circle border border-5 mx-auto text-white d-flex justify-content-center align-items-center bg-secondary">JS</div>`
+              class="rounded-circle border border-5 mx-auto text-white d-flex justify-content-center align-items-center bg-secondary">
+              ${user.firstName.split(" ")[0][0]}${
+                  user.firstName.split(" ")[1][0]
+                }
+              </div>`
           }
         <div class="text-center text-white mt-3" style="font-weight: 700">
           ${user.firstName}
@@ -159,24 +170,13 @@ async function getUser() {
 
     createPost.innerHTML = `<button
       type="button"
-      class="rounded text-white px-3"
+      class="rounded text-white py-1 px-3 bg-rainbow"
       style="border: none; background-color: #2e2e2e"
       data-bs-toggle="modal"
       data-bs-target="#CreatePostModal"
     >
       Create Post
     </button>`;
-
-    commentInputContainer.innerHTML = `
-                                      <input id="input-feed-id" hidden />
-                                      <input
-                                        type="text"
-                                        style="width: 100%; border: none; background-color: #4b4b4b"
-                                        class="rounded px-2 py-1 text-white"
-                                        placeholder="Comment"
-                                        id="input-comment"
-                                        onkeyup="handleCreateComment(event)"
-                                      />`;
   } else {
     leftSection.innerHTML = defaultElement;
     createPost.innerHTML = "";
