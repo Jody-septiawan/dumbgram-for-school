@@ -146,17 +146,17 @@ async function getUser() {
 
     leftSection.innerHTML = `<div class="text-center">
           ${
-            user.image
-              ? `<img
-          src=${user.image[0].url}
-          alt=""
-          style="width: 130px; height: 130px"
-          class="rounded-circle border border-5 border-rainbow"
-        />`
-              : `<div style="width: 130px; height: 130px; font-size: 40px; font-weight: 700"
-              class="rounded-circle border border-5 mx-auto text-white d-flex justify-content-center align-items-center bg-secondary">
-              ${name1}${name2}
-              </div>`
+            !user.image || user.image.length == 0
+              ? ` <div style="width: 130px; height: 130px; font-size: 40px; font-weight: 700"
+        class="rounded-circle border border-5 mx-auto text-white d-flex justify-content-center align-items-center bg-secondary">
+        ${name1}${name2}
+        </div>`
+              : `<img
+              src=${user.image[0].url}
+              alt=""
+              style="width: 130px; height: 130px"
+              class="rounded-circle border border-5 border-rainbow"
+            />`
           }
         <div class="text-center text-white mt-3" style="font-weight: 700">
           ${user.firstName}
