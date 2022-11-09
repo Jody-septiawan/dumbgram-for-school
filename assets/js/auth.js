@@ -136,6 +136,14 @@ async function getUser() {
 
     userData = user;
 
+    let splitName = user.firstName.split(" ");
+    let name1 = splitName[0][0];
+    let name2 = "";
+
+    if (splitName.length > 1) {
+      name2 = splitName[1][0];
+    }
+
     leftSection.innerHTML = `<div class="text-center">
           ${
             user.image
@@ -147,9 +155,7 @@ async function getUser() {
         />`
               : `<div style="width: 130px; height: 130px; font-size: 40px; font-weight: 700"
               class="rounded-circle border border-5 mx-auto text-white d-flex justify-content-center align-items-center bg-secondary">
-              ${user.firstName.split(" ")[0][0]}${
-                  user.firstName.split(" ")[1][0]
-                }
+              ${name1}${name2}
               </div>`
           }
         <div class="text-center text-white mt-3" style="font-weight: 700">
