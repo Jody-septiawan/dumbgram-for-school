@@ -10,20 +10,20 @@ async function getFeeds() {
   let feeds = document.getElementById("feeds");
 
   feeds.innerHTML = "";
-
-  data.forEach((feed) => {
+  data.forEach((feed, idx) => {
+    console.log(feed);
+    console.log(idx);
     let imgFeed = feed.attechment[0].url;
-    let imgUser = feed.Owner.image
-      ? `<img
-          class="rounded-circle"
-          style="width: 25px; height: 25px"
-          src=${feed.Owner.image[0].url}
-          alt=""
-        />`
-      : `<span class="rounded-circle text-white border d-flex justify-content-center align-items-center"
-      style="width: 25px; height: 25px; font-size: 11px">${
-        feed.Owner.firstName.split(" ")[0][0]
-      }${feed.Owner.firstName.split(" ")[1][0]}</span>`;
+    let imgUser = `<img
+    class="rounded-circle"
+    style="width: 25px; height: 25px"
+    src=${
+      !feed.Owner.image || feed.Owner.image.length == 0
+        ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+        : feed.Owner.image[0].url
+    }
+    alt=""
+  />`;
 
     feeds.innerHTML += `<div class="col-4 mb-4">
     <img
