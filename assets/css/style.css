@@ -1,0 +1,44 @@
+.hidden-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.bg-rainbow {
+  background: linear-gradient(
+    90deg,
+    #4dd4f7 0%,
+    #9090fb 36.46%,
+    #ff6b81 71.35%,
+    #fbdf63 100%
+  );
+}
+
+.formInput {
+  background-color: rgb(77, 77, 77);
+  width: 100%;
+  border: 1px solid white;
+}
+
+.FormButtonSubmit {
+  background: linear-gradient(
+    90deg,
+    #4dd4f7 0%,
+    #9090fb 36.46%,
+    #ff6b81 71.35%,
+    #fbdf63 100%
+  );
+  border: none;
+  width: 100%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.hover-action-feed:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.border-rainbow {
+  border-color: pink;
+}
