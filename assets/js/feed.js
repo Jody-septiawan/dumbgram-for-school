@@ -10,10 +10,8 @@ async function getFeeds() {
   let feeds = document.getElementById("feeds");
 
   feeds.innerHTML = "";
-  data.forEach((feed, idx) => {
-    console.log(feed);
-    console.log(idx);
-    let imgFeed = feed.attechment[0].url;
+  data.forEach((feed) => {
+    let imgFeed = `${feed.attechment[0].url}`;
     let imgUser = `<img
     class="rounded-circle"
     style="width: 25px; height: 25px"
@@ -25,9 +23,11 @@ async function getFeeds() {
     alt=""
   />`;
 
+    console.log(imgFeed);
+
     feeds.innerHTML += `<div class="col-4 mb-4">
     <img
-      src=${imgFeed}
+      src="${imgFeed}"
       alt=""
       class="rounded cursor-pointer"
       style="height: 500px; width: 100%; object-fit: cover"
